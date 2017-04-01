@@ -68,6 +68,11 @@ namespace MySimpleUtilities.ConsoleMenu
             }
         }
 
+        public void HideMenu()
+        {
+            exitMenu = true;
+        }
+
         public void UpdateMenu()
         {
             switch (Console.ReadKey(true).Key)
