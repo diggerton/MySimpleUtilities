@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace MySimpleUtilities
 {
-    public class Class1
+    public static class Utils
     {
+        public static Misc Misc = new Misc();
+        public static Web Web = new Web();
+        public static XML XML = new XML();
     }
 }
