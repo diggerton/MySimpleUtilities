@@ -65,7 +65,7 @@ namespace MySimpleUtilities
         {
             var fileName = _replaceSpaceChars ? _response.GetFileName().Replace(' ', _replacementChar) : _response.GetFileName();
             string directory = _directory;
-            string fullSavePath = Path.Combine(_directory, fileName);
+            string fullSavePath = _directory;
 
             if (_useFileNameAsSubdirectory)
             {
@@ -77,10 +77,8 @@ namespace MySimpleUtilities
                 directory = Path.Combine(directory, fileNameWithoutExtension);
                 fullSavePath = Path.Combine(directory, fileName);
             }
-            else
-            {
-                fullSavePath = Path.Combine(_directory, fileName);
-            }
+
+            fullSavePath = Path.Combine(directory, fileName);
 
             if (!Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
