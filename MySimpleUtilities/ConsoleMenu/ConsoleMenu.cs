@@ -41,10 +41,7 @@ namespace MySimpleUtilities.ConsoleMenu
 
             int id = MenuDict.Count == 0 ? 0 : MenuDict.Max(m => m.Key) + 1;
 
-            if (!MenuDict.Any(m => m.Value.Text.Equals(_item.Text, StringComparison.OrdinalIgnoreCase)))
-                MenuDict.Add(id, _item);
-            else
-                Debug.WriteLine("Duplicate MenuItem was not added to the collection.");
+            MenuDict.Add(id, _item);
         }
 
         public void ShowMenu()

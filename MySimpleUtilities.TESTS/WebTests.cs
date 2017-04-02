@@ -21,7 +21,6 @@ namespace MySimpleUtilities.TESTS
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             using (var response = (HttpWebResponse)request.GetResponse())
             {
-                var fileName = response.GetFileName();
                 var path = response.SaveFile(@"C:\Temp", false, true);
             }
         }

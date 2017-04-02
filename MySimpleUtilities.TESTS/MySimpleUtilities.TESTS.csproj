@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="MiscTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="XMLTests.cs" />
     <Compile Include="WebTests.cs" />
   </ItemGroup>

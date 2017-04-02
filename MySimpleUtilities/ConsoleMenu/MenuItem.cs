@@ -8,9 +8,9 @@ namespace MySimpleUtilities.ConsoleMenu
 {
     public class MenuItem
     {
-        public string Text { get; set; }
-        public Action Action { get; set; }
-        public bool ValidItem { get; set; }
+        public string Text { get; set; } = "<none>";
+        public Action Action { get; set; } = () => throw new NotImplementedException();
+        public bool ValidItem { get; set; } = true;
 
         public MenuItem()
         {
