@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleMenu\ConsoleMenu.cs" />
+    <Compile Include="ConsoleMenu\ConsoleUtil.cs" />
     <Compile Include="ConsoleMenu\MenuItem.cs" />
     <Compile Include="HttpContentExtensions.cs" />
     <Compile Include="Misc.cs" />

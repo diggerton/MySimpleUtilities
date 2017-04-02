@@ -34,10 +34,10 @@ namespace MySimpleUtilities.ConsoleMenu.TestConsole
                 Action = () => Console.WriteLine("Menu Item 2 selected"),
                 ValidItem = true
             });
-            menu.AddMenuItem(new MenuItem
+            menu.AddMenuItem(new MenuItem()
             {
                 Text = "MenuItem 3",
-                Action = () => Console.WriteLine("Menu Item 3 selected"),
+                Action = () => { Console.WriteLine("Menu Item 3 selected"); menu.DeleteCurrentMenuItem(); },
                 ValidItem = true
             });
 

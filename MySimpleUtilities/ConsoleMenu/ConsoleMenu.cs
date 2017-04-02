@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -32,16 +33,29 @@ namespace MySimpleUtilities.ConsoleMenu
         public bool DrawHeader { get; set; } = true;
         public bool DrawSubHeader { get; set; } = true;
 
-        private Dictionary<int, MenuItem> MenuDict { get; set; }
-
+        private List<MenuItemEx> MenuItems { get; set; } = new List<MenuItemEx>();
+        
         public void AddMenuItem(MenuItem _item)
         {
-            if (MenuDict == null)
-                MenuDict = new Dictionary<int, MenuItem>();
+            if (MenuItems == null)
+                new List<MenuItemEx>();
 
-            int id = MenuDict.Count == 0 ? 0 : MenuDict.Max(m => m.Key) + 1;
+            int id = MenuItems.Count == 0 ? 0 : MenuItems.Max(m => m.Id) + 1;
 
-            MenuDict.Add(id, _item);
+            MenuItems.Add(new MenuItemEx(_item) { Id = id });
+        }
+        
+        private void CleanMenuItems()
+        {
+            MenuItems.RemoveAll(m => m.DeleteSelf);
+            cursorPosition = ResolveCursorPosition(0);
+        }
+
+        public void DeleteCurrentMenuItem()
+        {
+            var curMenuItem = MenuItems.FirstOrDefault(m => m.Id == cursorPosition);
+            if (curMenuItem != null)
+                curMenuItem.DeleteSelf = true;
         }
 
         public void ShowMenu()
@@ -52,6 +66,8 @@ namespace MySimpleUtilities.ConsoleMenu
             {
                 Console.CursorVisible = false;
                 Console.Clear();
+
+                CleanMenuItems();
 
                 if (DrawHeader)
                     DrawHeaderText();
@@ -87,7 +103,7 @@ namespace MySimpleUtilities.ConsoleMenu
                 case ConsoleKey.Enter:
                     {
                         Console.CursorVisible = true;
-                        MenuDict[cursorPosition]?.Action();
+                        MenuItems[cursorPosition]?.Action();
                         PostActionAction?.Invoke();
                     }
                     break;
@@ -104,11 +120,11 @@ namespace MySimpleUtilities.ConsoleMenu
 
         public int ResolveCursorPosition(int _movement)
         {
-            if (!MenuDict.Any(m => m.Value.ValidItem))
-                throw new ArgumentException($"No valid { nameof(MenuItem) } found in { nameof(MenuDict) }.");
+            if (!MenuItems.Any(m => m.ValidItem))
+                throw new ArgumentException($"No valid { nameof(MenuItem) } found in { nameof(MenuItems) }.");
 
-            int minValidId = MenuDict.Where(m => m.Value.ValidItem).Min(m => m.Key);
-            int maxValidId = MenuDict.Where(m => m.Value.ValidItem).Max(m => m.Key);
+            int minValidId = MenuItems.Min(m => m.Id);
+            int maxValidId = MenuItems.Max(m => m.Id);
 
             if (cursorPosition + _movement <= minValidId)
                 return minValidId;
@@ -116,7 +132,8 @@ namespace MySimpleUtilities.ConsoleMenu
             if (cursorPosition + _movement >= maxValidId)
                 return maxValidId;
 
-            if (MenuDict.ContainsKey(cursorPosition + _movement) && MenuDict[cursorPosition + _movement].ValidItem)
+            if (MenuItems.FirstOrDefault(m=>m.Id==cursorPosition+_movement) != null
+                && MenuItems.First(m => m.Id == cursorPosition + _movement).ValidItem)
                 return cursorPosition + _movement;
             else
                 return ResolveCursorPosition(_movement > 0 ? _movement + 1 : _movement - 1);
@@ -125,19 +142,21 @@ namespace MySimpleUtilities.ConsoleMenu
         public void DrawMenuText()
         {
             var cursorPadding = (" " + CursorChar + " ").Length;
-            for (int i = 0; i < MenuDict.Count; i++)
+
+            foreach (var item in MenuItems)
             {
-                if(i == cursorPosition)
+                if (item.Id == cursorPosition)
                 {
                     Console.Write(" ");
                     WriteColor(CursorChar, HighlightColor);
                     Console.Write(" ");
-                    WriteLineColor(MenuDict[i].Text, HighlightColor);
+                    WriteLineColor(item.Text, HighlightColor);
                 }
+
                 else
                 {
                     Console.Write(new string(' ', cursorPadding));
-                    WriteLineColor(MenuDict[i].Text);
+                    WriteLineColor(item.Text);
                 }
             }
         }
@@ -198,6 +217,19 @@ namespace MySimpleUtilities.ConsoleMenu
             } while (!valid);
 
             return input;
+        }
+
+        private class MenuItemEx : MenuItem
+        {
+            public MenuItemEx(MenuItem _mi)
+            {
+                Text = _mi.Text;
+                Action = _mi.Action;
+                ValidItem = _mi.ValidItem;
+            }
+
+            public int Id { get; set; }
+            public bool DeleteSelf { get; set; } = false;
         }
     }
 }
