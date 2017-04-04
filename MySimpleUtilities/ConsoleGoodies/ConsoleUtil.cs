@@ -21,7 +21,7 @@ namespace MySimpleUtilities.ConsoleMenu
             WriteColor(_p + Environment.NewLine, _color);
         }
 
-        public static EscapableInputReturnModel<T> GetValidatedEscapableInput<T>(string prompt, string retry, Func<T, bool> validator)
+        public static EscapableInputReturnModel<T> GetValidatedEscapableInput<T>(string prompt, Func<T, bool> validator, string retry = "Invalid Input")
         {
             T value;
             var returnModel = new EscapableInputReturnModel<T>();
@@ -53,12 +53,12 @@ namespace MySimpleUtilities.ConsoleMenu
             catch (Exception)
             {
                 Console.WriteLine(retry);
-                GetValidatedEscapableInput(prompt, retry, validator);
+                GetValidatedEscapableInput(prompt, validator, retry);
             }
 
             return returnModel;
         }
-        public static EscapableInputReturnModel<T> GetEscapableInput<T>(string _prompt, string _retry)
+        public static EscapableInputReturnModel<T> GetEscapableInput<T>(string _prompt, string _retry = "Invalid Input")
         {
             Console.Write($"{ _prompt }: ");
             ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
@@ -120,6 +120,19 @@ namespace MySimpleUtilities.ConsoleMenu
             }
 
             return value;
+        }
+
+        public static bool GetValidatedEscapableInput<T>(string _prompt, Func<T, bool> _validator, out T _value, string _retry = "Invalid Input")
+        {
+            var result = GetValidatedEscapableInput<T>(_prompt, _validator, _retry);
+            _value = result.Value;
+            return !result.WasEscaped;
+        }
+        public static bool GetEscapableInput<T>(string _prompt, out T _value, string _retry = "Invalid Input")
+        {
+            var result = GetEscapableInput<T>(_prompt, _retry);
+            _value = result.Value;
+            return result.WasEscaped;
         }
     }
 }

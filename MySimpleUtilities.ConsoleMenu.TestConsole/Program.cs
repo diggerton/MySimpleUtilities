@@ -40,11 +40,22 @@ namespace MySimpleUtilities.ConsoleMenu.TestConsole
             //    Action = () => { Console.WriteLine("Menu Item 3 selected"); menu.DeleteCurrentMenuItem(); },
             //    ValidItem = true
             //});
-
             //menu.ShowMenu();
 
-            var input = ConsoleUtil.GetInput<bool>("test");
-            Console.WriteLine(input);
+            //var input = ConsoleUtil.GetInput<bool>("test");
+            //Console.WriteLine(input);
+
+            //if (ConsoleUtil.GetValidatedEscapableInput<int>("Give me an int between 5-25.", x => x >= 5 && x <= 25, out int value))
+            //    Console.WriteLine(value);
+            //else
+            //    Console.WriteLine("Escaped");
+
+            //if (ConsoleUtil.GetValidatedEscapableInput<string>("Give me a string with length greater than 5", x => x.Length > 5, out string result))
+            //    Console.WriteLine($"String: { result }{ Environment.NewLine }Length: { result.Length }");
+            //else
+            //    Console.WriteLine("Escaped");
+
+
 
             Console.ReadKey();
         }
