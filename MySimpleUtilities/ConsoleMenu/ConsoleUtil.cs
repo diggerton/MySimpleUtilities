@@ -31,7 +31,10 @@ namespace MySimpleUtilities.ConsoleMenu
             {
                 string input;
                 if (isBoolean)
-                    input = Console.ReadKey().ToString().Equals("y", StringComparison.OrdinalIgnoreCase) ? "true" : "false";
+                {
+                    input = Console.ReadKey().Key.ToString().Equals("y", StringComparison.OrdinalIgnoreCase) ? "true" : "false";
+                    Console.WriteLine();
+                }
                 else
                     input = Console.ReadLine();
 
@@ -49,5 +52,7 @@ namespace MySimpleUtilities.ConsoleMenu
                 return GetInput<T>(_prompt, _retry);
             }
         }
+
+
     }
 }

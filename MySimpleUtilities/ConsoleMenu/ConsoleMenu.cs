@@ -35,11 +35,21 @@ namespace MySimpleUtilities.ConsoleMenu
 
         private List<MenuItemEx> MenuItems { get; set; } = new List<MenuItemEx>();
         
+        /// <summary>
+        /// Adds spacer menu item.
+        /// </summary>
+        public void AddMenuItem()
+        {
+            int id = MenuItems.Count == 0 ? 0 : MenuItems.Max(m => m.Id) + 1;
+
+            MenuItems.Add(new MenuItemEx(new MenuItem { Text = "", ValidItem = false }) { Id = id });
+        }
+        /// <summary>
+        /// Adds new menu item.
+        /// </summary>
+        /// <param name="_item">MenuItem object</param>
         public void AddMenuItem(MenuItem _item)
         {
-            if (MenuItems == null)
-                new List<MenuItemEx>();
-
             int id = MenuItems.Count == 0 ? 0 : MenuItems.Max(m => m.Id) + 1;
 
             MenuItems.Add(new MenuItemEx(_item) { Id = id });
@@ -51,6 +61,9 @@ namespace MySimpleUtilities.ConsoleMenu
             cursorPosition = ResolveCursorPosition(0);
         }
 
+        /// <summary>
+        /// Deletes currently selected menu item.
+        /// </summary>
         public void DeleteCurrentMenuItem()
         {
             var curMenuItem = MenuItems.FirstOrDefault(m => m.Id == cursorPosition);
