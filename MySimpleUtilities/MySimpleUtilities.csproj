@@ -41,9 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleMenu\ConsoleMenu.cs" />
-    <Compile Include="ConsoleMenu\ConsoleUtil.cs" />
-    <Compile Include="ConsoleMenu\MenuItem.cs" />
+    <Compile Include="ConsoleGoodies\ConsoleMenu.cs" />
+    <Compile Include="ConsoleGoodies\ConsoleUtil.cs" />
+    <Compile Include="ConsoleGoodies\Models\EscapableInputReturnModel.cs" />
+    <Compile Include="ConsoleGoodies\Models\MenuItem.cs" />
     <Compile Include="HttpContentExtensions.cs" />
     <Compile Include="Misc.cs" />
     <Compile Include="Utils.cs" />

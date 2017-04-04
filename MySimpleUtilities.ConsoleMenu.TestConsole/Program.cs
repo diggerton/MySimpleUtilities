@@ -43,10 +43,10 @@ namespace MySimpleUtilities.ConsoleMenu.TestConsole
 
             //menu.ShowMenu();
 
+            var input = ConsoleUtil.GetInput<bool>("test");
+            Console.WriteLine(input);
 
-            var input = ConsoleUtil.GetInput<bool>("say yes");
-
-
+            Console.ReadKey();
         }
     }
 }

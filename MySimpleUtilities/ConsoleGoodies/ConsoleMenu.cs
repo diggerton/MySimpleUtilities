@@ -182,19 +182,19 @@ namespace MySimpleUtilities.ConsoleMenu
             WriteLineColor(SubHeaderText, SubHeaderColor);
         }
 
-        public void WriteColor(string _text, ConsoleColor _foreColor = ConsoleColor.Gray)
+        public virtual void WriteColor(string _text, ConsoleColor _foreColor = ConsoleColor.Gray)
         {
             ConsoleColor originalForeColor = Console.ForegroundColor;
             Console.ForegroundColor = _foreColor;
             Console.Write(_text);
             Console.ForegroundColor = originalForeColor;
         }
-        public void WriteLineColor(string _text, ConsoleColor _foreColor = ConsoleColor.Gray)
+        public virtual void WriteLineColor(string _text, ConsoleColor _foreColor = ConsoleColor.Gray)
         {
             WriteColor(_text + Environment.NewLine, _foreColor);
         }
         
-        public string PromptUser(string _prompt, bool _singleCharInput = false)
+        public virtual string PromptUser(string _prompt, bool _singleCharInput = false)
         {
             Console.Write(_prompt + ": ");
             var result = string.Empty;
@@ -206,7 +206,7 @@ namespace MySimpleUtilities.ConsoleMenu
 
             return result;
         }
-        public T GetInput<T>(string _prompt, string _retry, bool _singleCharInput = false)
+        public virtual T GetInput<T>(string _prompt, string _retry, bool _singleCharInput = false)
         {
             try
             {
@@ -218,7 +218,7 @@ namespace MySimpleUtilities.ConsoleMenu
                 return GetInput<T>(_prompt, _retry, _singleCharInput);
             }
         }
-        public T ValidateInput<T>(string _prompt, string _retry, Func<T, bool> _comparer, bool _singleCharInput = false)
+        public virtual T ValidateInput<T>(string _prompt, string _retry, Func<T, bool> _comparer, bool _singleCharInput = false)
         {
             T input;
             var valid = false;
