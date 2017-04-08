@@ -28,6 +28,8 @@ namespace MySimpleUtilities.ConsoleMenu
         /// <summary>
         /// An additional Action performed after MenuItem.Action
         /// </summary>
+        public Action PreDrawMenuAction { get; set; }
+        public Action PostDrawMenuAction { get; set; }
         public Action PostActionAction { get; set; }
         public bool EscapeClosesMenu { get; set; } = true;
         public bool DrawHeader { get; set; } = true;
@@ -89,16 +91,16 @@ namespace MySimpleUtilities.ConsoleMenu
                 if(DrawHeader || DrawSubHeader)
                     Console.WriteLine();
 
+                PreDrawMenuAction?.Invoke();
                 DrawMenuText();
+                PostDrawMenuAction?.Invoke();
                 UpdateMenu();
             }
         }
-
         public void HideMenu()
         {
             exitMenu = true;
         }
-
         public void UpdateMenu()
         {
             switch (Console.ReadKey(true).Key)
@@ -152,7 +154,7 @@ namespace MySimpleUtilities.ConsoleMenu
                 return ResolveCursorPosition(_movement > 0 ? _movement + 1 : _movement - 1);
         }
 
-        public void DrawMenuText()
+        public virtual void DrawMenuText()
         {
             var cursorPadding = (" " + CursorChar + " ").Length;
 
@@ -173,11 +175,11 @@ namespace MySimpleUtilities.ConsoleMenu
                 }
             }
         }
-        public void DrawHeaderText()
+        public virtual void DrawHeaderText()
         {
             WriteLineColor(HeaderText, HeaderColor);
         }
-        public void DrawSubHeaderText()
+        public virtual void DrawSubHeaderText()
         {
             WriteLineColor(SubHeaderText, SubHeaderColor);
         }

@@ -10,12 +10,38 @@ namespace MySimpleUtilities.ConsoleMenu.TestConsole
     {
         static void Main(string[] args)
         {
-            if (ConsoleUtil.GetValidatedEscapableInput<int>("5 < int < 10", x => x > 5 && x < 10, out int value))
+            var consoleMenu = new ConsoleMenu()
             {
-                Console.WriteLine("Good! " + value);
+                HeaderText = "Test Header",
+                SubHeaderText = "test sub header",
+                EscapeClosesMenu = true
+            };
+            consoleMenu.AddMenuItem(new MenuItem
+            {
+                Text = "Menu Item 1"
+            });
+            consoleMenu.AddMenuItem(new MenuItem
+            {
+                Text = "Menu Item 2"
+            });
+            consoleMenu.AddMenuItem(new MenuItem
+            {
+                Text = "Menu Item 3"
+            });
+            consoleMenu.AddMenuItem(new MenuItem
+            {
+                Text = "Exit",
+                Action = () => consoleMenu.HideMenu()
+            });
+
+            consoleMenu.PreDrawMenuAction = () => ConsoleUtil.WriteLineColor("TEST PRE SHOW MENU ACTION", ConsoleColor.Magenta);
+
+            consoleMenu.ShowMenu();
+
+            foreach (var color in Enum.GetNames(typeof(ConsoleColor)))
+            {
+                ConsoleUtil.WriteLineColor(color.ToString(), (ConsoleColor)Enum.Parse(typeof(ConsoleColor), color));
             }
-            else
-                Console.WriteLine("Canceled input");
 
             Console.ReadKey();
         }
