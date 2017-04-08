@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MySimpleUtilities.ConsoleMenu
+namespace MySimpleUtilities.ConsoleExtended
 {
     public static class ConsoleUtil
     {
