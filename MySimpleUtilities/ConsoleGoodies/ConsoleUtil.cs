@@ -8,16 +8,27 @@ namespace MySimpleUtilities.ConsoleExtended
 {
     public static class ConsoleUtil
     {
-        public static void WriteColor(string _p, ConsoleColor _color = ConsoleColor.Gray)
+        public static void WriteColor(string _p, ConsoleColor _foreColor = ConsoleColor.Gray, ConsoleColor _backColor = ConsoleColor.Black)
         {
-            var originalColor = Console.ForegroundColor;
-            Console.ForegroundColor = _color;
+            var originalForeColor = Console.ForegroundColor;
+            var originalBackColor = Console.BackgroundColor;
+
+            Console.ForegroundColor = _foreColor;
+            Console.BackgroundColor = _backColor;
+
             Console.Write(_p);
-            Console.ForegroundColor = originalColor;
+            Console.ForegroundColor = originalForeColor;
+            Console.BackgroundColor = originalBackColor;
         }
-        public static void WriteLineColor(string _p, ConsoleColor _color = ConsoleColor.Gray)
+        public static void WriteLineColor(string _p, ConsoleColor _foreColor = ConsoleColor.Gray, ConsoleColor _backColor = ConsoleColor.Black)
         {
-            WriteColor(_p + Environment.NewLine, _color);
+            WriteColor(_p + Environment.NewLine, _foreColor, _backColor);
+        }
+        public static void Continue(string _p = "Press any key to continue...", ConsoleColor _foreColor = ConsoleColor.Gray, ConsoleColor _backColor = ConsoleColor.Black)
+        {
+            WriteColor(_p, _foreColor, _backColor);
+            Console.ReadKey();
+            Console.WriteLine();
         }
 
         public static T GetInput<T>(string _prompt, string _retry = "Invalid Input")

@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{206C8D7D-8FE6-4D76-830A-BB5DE803147F}</ProjectGuid>
+    <ProjectGuid>{EF4F8AF7-2CB4-4895-AB41-F59F27A44CD6}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>MySimpleUtilities.ConsoleMenu.TestConsole</RootNamespace>
-    <AssemblyName>MySimpleUtilities.ConsoleMenu.TestConsole</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <RootNamespace>MySimpleUtilityes.TESTConsole</RootNamespace>
+    <AssemblyName>MySimpleUtilityes.TESTConsole</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -43,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyConsoleMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MySimpleUtilities\MySimpleUtilities.csproj">
-      <Project>{d51925c7-b914-40b1-bed6-f6797ca3ac23}</Project>
+      <Project>{D51925C7-B914-40B1-BED6-F6797CA3AC23}</Project>
       <Name>MySimpleUtilities</Name>
     </ProjectReference>
   </ItemGroup>

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleGoodies\ConsoleMenu.cs" />
+    <Compile Include="ConsoleGoodies\ConsoleMenuBase.cs" />
     <Compile Include="ConsoleGoodies\ConsoleUtil.cs" />
     <Compile Include="ConsoleGoodies\Models\MenuItem.cs" />
     <Compile Include="HttpContentExtensions.cs" />

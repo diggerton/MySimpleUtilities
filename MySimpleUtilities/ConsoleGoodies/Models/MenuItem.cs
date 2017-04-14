@@ -8,19 +8,57 @@ namespace MySimpleUtilities.Models.ConsoleMenu
 {
     public class MenuItem
     {
-        public string Text { get; set; } = "";
-        public Action Action { get; set; } = () => throw new NotImplementedException();
-        public bool ValidItem { get; set; } = true;
+        private Action _action;
+        private int _indent;
 
-        public MenuItem()
+        public Action PreActionAction { get; set; }
+        public Action PostActionAction { get; set; }
+        public Action Action
         {
-
+            get
+            {
+                return () =>
+                {
+                    this.PreActionAction?.Invoke();
+                    this._action.Invoke();
+                    this.PostActionAction?.Invoke();
+                };
+            }
+            set { _action = value; }
         }
-        public MenuItem(string _text, Action _action, bool _validItem = true)
+
+        public ConsoleColor? ForeColor { get; set; }
+        public ConsoleColor? BackColor { get; set; }
+        public ConsoleColor? HighlightForeColor { get; set; }
+        public ConsoleColor? HighlightBackColor { get; set; }
+
+        public string Text { get; set; }
+        public bool ValidItem { get; set; } = true;
+        public bool ExitAfterAction { get; set; }
+        public int Id { get; set; }
+        public bool DeleteSelf { get; set; }
+        /// <summary>
+        /// Additional MenuItem.Text indent, after cursor is drawn.  Must be >= 0.
+        /// </summary>
+        public int Indent
         {
-            Text = _text;
-            Action = _action;
-            ValidItem = _validItem;
+            get { return _indent; }
+            set
+            {
+                if (value < 0)
+                    _indent = 0;
+                _indent = value;
+            }
+        }
+
+
+        public static MenuItem Spacer(string _text = "")
+        {
+            return new MenuItem()
+            {
+                Text = _text,
+                ValidItem = false
+            };
         }
     }
 }
