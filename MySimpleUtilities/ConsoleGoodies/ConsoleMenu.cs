@@ -54,6 +54,8 @@ namespace MySimpleUtilities.ConsoleMenu
         public void AddMenuItem(MenuItem _item)
         {
             int id = MenuItems.Count == 0 ? 0 : MenuItems.Max(m => m.Id) + 1;
+            if (string.IsNullOrWhiteSpace(_item.Text))
+                _item.ValidItem = false;
 
             MenuItems.Add(new MenuItemEx(_item) { Id = id });
         }
