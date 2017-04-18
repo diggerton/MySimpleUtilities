@@ -20,7 +20,7 @@ namespace MySimpleUtilities.Models.ConsoleMenu
                 return () =>
                 {
                     this.PreActionAction?.Invoke();
-                    this._action.Invoke();
+                    this._action?.Invoke();
                     this.PostActionAction?.Invoke();
                 };
             }
@@ -42,13 +42,14 @@ namespace MySimpleUtilities.Models.ConsoleMenu
         /// </summary>
         public int Indent
         {
-            get { return _indent; }
-            set
+            get
             {
-                if (value < 0)
-                    _indent = 0;
-                _indent = value;
+                if (_indent < 0)
+                    return 0;
+                else
+                    return _indent;
             }
+            set { _indent = value; }
         }
 
 
