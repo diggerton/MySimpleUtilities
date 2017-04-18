@@ -31,9 +31,7 @@ namespace MySimpleUtilities.ConsoleMenu
 
         public Action PostActionAction { get; set; }
         public Action OnExitAction { get; set; }
-        public Func<IEnumerable<MenuItem>> BuildDynamicMenu { get; set; }
 
-        public bool UseDynamicMenuGeneration { get; set; }
         public bool EscapeClosesMenu { get; set; } = true;
         public bool DrawHeader { get; set; } = true;
         public bool DrawSubHeader { get; set; } = true;
