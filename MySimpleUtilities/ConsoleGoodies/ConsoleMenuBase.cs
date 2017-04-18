@@ -31,17 +31,15 @@ namespace MySimpleUtilities.ConsoleMenu
 
         public Action PostActionAction { get; set; }
         public Action OnExitAction { get; set; }
+        public Func<IEnumerable<MenuItem>> BuildDynamicMenu { get; set; }
 
+        public bool UseDynamicMenuGeneration { get; set; }
         public bool EscapeClosesMenu { get; set; } = true;
         public bool DrawHeader { get; set; } = true;
         public bool DrawSubHeader { get; set; } = true;
 
         private Dictionary<int, MenuItem> MenuItems { get; set; } = new Dictionary<int, MenuItem>();
 
-        /// <summary>
-        /// Adds new menu item.
-        /// </summary>
-        /// <param name="_item">MenuItem object</param>
         public virtual void AddMenuItem(MenuItem _item)
         {
             int id = MenuItems.Count == 0 ? 0 : MenuItems.Max(m => m.Key) + 1;
