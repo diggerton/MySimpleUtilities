@@ -41,9 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleGoodies\ConsoleMenuBase.cs" />
-    <Compile Include="ConsoleGoodies\ConsoleUtil.cs" />
-    <Compile Include="ConsoleGoodies\Models\MenuItem.cs" />
     <Compile Include="HttpContentExtensions.cs" />
     <Compile Include="Misc.cs" />
     <Compile Include="Utils.cs" />
